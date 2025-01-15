@@ -1,0 +1,201 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Time Period</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/user-profile"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding page">
+  <div class="addMore">
+    <ion-button id="open-timeperiod-modal" size="small"
+      ><ion-icon name="add-circle-outline" size="large"></ion-icon>
+    </ion-button>
+  </div>
+
+  <ion-card *ngFor="let alottedPeriod of alottedPeriods" class="styled-card">
+    <ion-card-header>
+      <ion-card-title>Class : {{ alottedPeriod.class }}</ion-card-title>
+      <ion-card-subtitle
+        >Subject : {{ alottedPeriod.subject }}</ion-card-subtitle
+      >
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="card-detail">
+        <ion-icon name="person-circle-outline"></ion-icon>
+        <span>Teacher: {{ alottedPeriod.teacherName }}</span>
+      </div>
+      <div class="card-detail">
+        <ion-icon name="calendar-outline"></ion-icon>
+        <span>Date: {{ alottedPeriod.date }}</span>
+      </div>
+      <div class="card-detail">
+        <ion-icon name="time-outline"></ion-icon>
+        <span
+          >Time: {{ alottedPeriod.start_time.split(' ')[1] }} - {{
+          alottedPeriod.end_time.split(' ')[1] }}</span
+        >
+      </div>
+    </ion-card-content>
+  </ion-card>
+  <ion-infinite-scroll threshold="150px" (ionInfinite)="onIonInfinite($event)">
+    <ion-infinite-scroll-content
+      loadingSpinner="bubbles"
+      loadingText="Loading more ...."
+    >
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+  <ion-modal
+    trigger="open-timeperiod-modal"
+    (willDismiss)="onWillDismiss($event)"
+  >
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-buttons slot="start">
+            <ion-button (click)="cancel()">Cancel</ion-button>
+          </ion-buttons>
+          <ion-title></ion-title>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <form
+          [formGroup]="timeperiodForm"
+          (ngSubmit)="onSubmit(timeperiodForm.value)"
+        >
+          <ion-item>
+            <ion-select
+              label="Class"
+              placeholder="Select Class"
+              formControlName="class"
+              (ionChange)="onClassChange($event)"
+            
+            >
+              <ion-select-option value="I">I</ion-select-option>
+              <ion-select-option value="II">II</ion-select-option>
+              <ion-select-option value="III">III</ion-select-option>
+              <ion-select-option value="IV">IV</ion-select-option>
+              <ion-select-option value="V">V</ion-select-option>
+              <ion-select-option value="VI">VI</ion-select-option>
+              <ion-select-option value="VII">VII</ion-select-option>
+              <ion-select-option value="VIII">VIII</ion-select-option>
+              <ion-select-option value="VIII">VIII</ion-select-option>
+              <ion-select-option value="IX">IX</ion-select-option>
+              <ion-select-option value="X">X</ion-select-option>
+              <ion-select-option value="XI">XI</ion-select-option>
+              <ion-select-option value="XII">XII</ion-select-option>
+            </ion-select></ion-item
+          >
+          <ion-item>
+            <ion-select
+              label="Subject"
+              placeholder="Select Subject"
+              formControlName="subject"
+              (ionChange)="onSubjectChange($event)"
+            >
+              <ion-select-option value="Hindi">Hindi</ion-select-option>
+              <ion-select-option value="English">English</ion-select-option>
+              <ion-select-option value="Math">Math</ion-select-option>
+              <ion-select-option value="Science">Science</ion-select-option>
+              <ion-select-option value="Social Science"
+                >Social Science</ion-select-option
+              >
+              <ion-select-option value="EVS">EVS</ion-select-option>
+              <ion-select-option value="Computer">Computer</ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            
+            <ion-select
+              label="Teacher"
+              placeholder="Select Teacher"
+              formControlName="teacherId"
+            >
+              <ion-select-option
+                *ngFor="let teacher of teachers"
+                [value]="teacher.id"
+              >
+                {{ teacher.fullName }}
+              </ion-select-option>
+            </ion-select>
+          </ion-item>
+          <ion-item>
+            <ion-label> Pick date</ion-label>
+            <ion-button fill="clear" disabled="{{isDisabled}}">
+              <ion-icon icon="calendar"></ion-icon>
+              <ion-text id="pickdate">
+                {{ dateSchedule ? dateSchedule : 'Select Date' }}
+              </ion-text>
+            </ion-button>
+
+            <ion-popover trigger="pickdate">
+              <ng-template>
+                <ion-datetime
+                  size="cover"
+                  displayFormat="DD-MM-YYYY"
+                  presentation="date"
+                  [min]="mindate"
+                  (ionChange)="DatePicked($event)"
+                  [showDefaultButtons]="true"
+                  formControlName="date"
+                  [(ngModel)]="dateSchedule"
+                ></ion-datetime>
+              </ng-template>
+            </ion-popover>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Start Time</ion-label>
+            <ion-button fill="clear" disabled="{{isDisabled}}">
+              <ion-icon icon="time"> </ion-icon>
+              <ion-text slot="end" id="startTime">
+                {{startTime ? startTime : " Start " }}</ion-text
+              >
+            </ion-button>
+          </ion-item>
+          <ion-popover trigger="startTime" slot="end">
+            <ng-template>
+              <ion-datetime
+                size="cover"
+                presentation="time"
+                minuteValues="0,30"
+                (ionChange)="onStartTimeChange($event)"
+                [showDefaultButtons]="true"
+                formControlName="startTime"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+
+          <ion-item>
+            <ion-label>End Time</ion-label>
+            <ion-button fill="clear" disabled="{{isDisabled}}">
+              <ion-icon icon="time"></ion-icon>
+              <ion-text slot="end" id="endTime">
+                {{endTime? endTime:" End " }}
+              </ion-text>
+            </ion-button>
+          </ion-item>
+          <ion-popover trigger="endTime">
+            <ng-template>
+              <ion-datetime
+                size="cover"
+                presentation="time"
+                minuteValues="0,30"
+                [showDefaultButtons]="true"
+                (ionChange)="onEndTimeChange($event)"
+                formControlName="endTime"
+              ></ion-datetime>
+            </ng-template>
+          </ion-popover>
+          <ion-col class="ion-text-center">
+            <ion-button type="submit" [disabled]="!timeperiodForm.valid"
+              >Save</ion-button
+            >
+          </ion-col>
+        </form>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

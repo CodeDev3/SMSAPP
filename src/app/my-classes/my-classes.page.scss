@@ -1,0 +1,36 @@
+.center{
+    justify-content: center;
+}
+
+.header{
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    font-weight: bolder;
+    font-size: 25px;
+    // background-color: rgba(217, 90, 5, 0.908);
+    background-color: rgba(248, 67, 2, 0.908);
+    gap:15px;
+}
+ion-card{
+    background-color: rgba(64, 64, 64, 0.417);
+    color: black;
+}
+
+span{
+    font-size: large;
+}
+
+strong{
+    color: rgb(18, 1, 91);
+}
+
+.trigger-date-class{
+    position: relative;
+    top:10px;
+    left:80%;
+}
+
+.dateCalenderMyclass{
+    width:100%;
+}

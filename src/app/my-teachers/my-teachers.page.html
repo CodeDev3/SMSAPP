@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>My Teachers</ion-title>
+    <ion-buttons slot="start">
+  <ion-back-button default-href="/user-profile" ></ion-back-button>
+</ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true" class="page">
+  <ion-list *ngFor="let teacher of teachers">
+    <ion-card class="teacher-card"> 
+
+      <ion-grid>
+        <ion-row>
+         
+          <ion-col size="3">
+
+    <img
+              [src]="teacher.profileImage ?teacher.profileImage : '../../assets/blank-profile-picture-973460_1280.webp'"
+              class="profile-picture-container"
+            />
+         
+          </ion-col>
+          <ion-col size="9" class="teacher-details" >
+              <ion-icon name="radio-button-on" [color]="teacher.status?'success':'danger'" class="status"></ion-icon>
+              <p class="teacher-name">{{teacher.fullname}}</p> 
+              <p class="teacher-email" ><strong>Email : </strong>{{ teacher.email }}</p>
+              <!-- <p><strong>Date of Birth : </strong>{{ teacher.dob }}</p>
+              <p><strong>Mobile : </strong>{{ teacher.mob }}</p> -->
+              <p><strong>Class : </strong>{{ teacher.class }}</p>
+              <p><strong>Subject : </strong>{{ teacher.subject }}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-list>
+    <ion-infinite-scroll threshold="150px" (ionInfinite)="onIonInfinite($event)">  
+    <ion-infinite-scroll-content  
+      loadingSpinner="bubbles"  
+      loadingText="Loading more ....">  
+    </ion-infinite-scroll-content>  
+  </ion-infinite-scroll>  
+</ion-content>

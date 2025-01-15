@@ -1,0 +1,93 @@
+  <ion-header>
+    <ion-toolbar>
+    <ion-toggle *ngIf="loginUserRole === 'Teacher'" 
+            (ionChange)="updateLoginStatus()"   
+            [ngClass]="status ? 'login' : 'logout'"  
+            [checked]="status" 
+            slot="end"
+            id="trigger-status-update"
+            >
+
+      <!-- <ion-modal #modal trigger="trigger-status-update">
+        <ng-template>
+          <ion-content>
+            <div class="modal-content">
+              <ion-toolbar>
+                <ion-title>Logout</ion-title>
+                <ion-buttons slot="end">
+                  <ion-button color="light" (click)="modal.dismiss()"
+                    >Close</ion-button
+                  >
+                </ion-buttons>
+              </ion-toolbar>
+              <ion-list>
+                <div class="container-modal">
+                  <ion-label> Are you sure you want to logout?</ion-label>
+                  <div class="buttons">
+                    <ion-button
+                      color="danger"
+                      class="logout-confirm"
+                      (click)="modal.dismiss()"
+                      >No</ion-button
+                    >
+                    <ion-button
+                      class="logout-confirm"
+                      (click)="modal.dismiss()"
+                      >Yes</ion-button
+                    >
+                  </div>
+                </div>
+              </ion-list>
+            </div>
+          </ion-content>
+        </ng-template>
+      </ion-modal> -->
+
+</ion-toggle>
+
+
+      <ion-buttons slot="end">
+        <ion-menu-button  menu="mainMenu"></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Home</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="page">
+    <ion-card class="profile-card">
+      <ion-grid>
+        <ion-row class="profile-header">
+          <ion-col>
+     
+         <ion-icon class="edit-icon" name="create"  color="dark" button  (click)="edit()"></ion-icon>
+           
+
+            <div class="profile-picture-container">
+              <img
+                [src]=" profileImage ? profileImage :'../../assets/blank-profile-picture-973460_1280.webp'"
+                alt="Profile Picture"
+                class="profile-picture"
+              />
+
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="profile-info">
+              <p><strong>Username :</strong> {{loginUserData?.username}}</p>
+              <p><strong>Name :</strong> {{loginUserData?.fullName}}</p>
+              <p><strong>First Name :</strong> {{loginUserData?.firstName}}</p>
+              <p><strong>Last Name:</strong> {{loginUserData?.lastName}}</p>
+              <p><strong>Email :</strong> {{loginUserData?.email}}</p>
+              <p><strong>Date of Birth :</strong> {{loginUserData?.dob}}</p>
+              <p><strong>Mobile :</strong> {{loginUserData?.mobileNumber}}</p>
+              <p><strong>Role :</strong> {{loginUserData?.userRole}}</p>
+              <p *ngIf="loginUserData?.class"><strong>Class :</strong> {{ loginUserData.class }}</p>
+              <p *ngIf="loginUserData?.subject"><strong>Subject :</strong> {{ loginUserData.subject }}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-content>
+

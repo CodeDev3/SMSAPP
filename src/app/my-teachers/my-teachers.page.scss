@@ -1,0 +1,53 @@
+.profile-picture-container {
+  border-radius: 50%;
+  width: 95%;
+  height: auto;
+  max-width: 100px;
+  margin: 10px auto;
+  display: block;
+  object-fit: cover;
+}
+
+.teacher-details{
+  font-size: 1rem;
+  color: #000000;
+}
+
+.teacher-details p {
+  margin: 10px 0px 10px 0;
+}
+
+.teacher-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  justify-content: center;
+}
+
+.teacher-card {
+  margin-bottom: 15px;
+  border-radius: 12px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+}
+
+ion-item{
+  margin: 15px 0px 15px 0px;
+}
+
+ion-list {
+  background-color: #06a7ec; 
+  margin : 10px 0px 0px 5px;
+}
+
+.teacher-email{
+  font-size: 15px;
+}
+
+
+.status{
+  position: fixed;
+  top:10px;
+  right:15px;
+}

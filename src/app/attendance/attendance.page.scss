@@ -1,0 +1,28 @@
+.container-center{
+    display: flex;
+    justify-content: center;
+    margin:10px;
+}
+
+.teacher-details{
+    font-size: 16px;
+}
+
+
+.profile-picture-container{
+    border-radius: 50%;
+    border: 5px solid #2575fc;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.download-btn{
+    font-size: 35px;
+    color:rgb(73, 73, 75);
+}
+
+.end
+{
+    display: flex;
+    justify-content: end;
+    margin:5px 20px 5px 0px; 
+}

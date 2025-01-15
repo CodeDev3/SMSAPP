@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="/user-profile"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="center"><h2>My Classes</h2></ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="page">
+  <ion-text>
+<ion-icon name="calendar-outline" size="large" id="trigger-date" class="trigger-date-class"></ion-icon>
+  </ion-text>
+<ion-popover  trigger="trigger-date" [dismissOnSelect]="true">
+  <ng-template>
+  <ion-datetime  presentation="date" [value]="currentDate" (ionChange)="selectedDate($event)"   class="dateCalenderMyclass">
+  </ion-datetime>
+  </ng-template>
+</ion-popover>
+
+<ion-card>
+  <ion-text *ngIf="notAlotted"><h4>No Classes were Alotted on Selcted Date</h4></ion-text>
+</ion-card>
+  <ion-card *ngFor="let class of classes">
+    <div class="header">
+      {{class.class}}
+      <br />
+    </div>
+    <ion-card-content>
+      <div class="card-detail">
+        <span>
+          <strong><ion-icon name="book-outline"></ion-icon> 
+            Subject : </strong>{{userdata.subject}}</span>
+        <br/>
+        <span>
+          <strong> <ion-icon name="alarm-outline"></ion-icon> 
+            Time : </strong>
+            {{class.start_time.split(' ')[1]? Time(class.start_time) : class.start_time.split(' ')[1]}} 
+            - 
+            {{class.end_time.split(' ')[1]? Time(class.end_time) : class.end_time.split(' ')[1] }}
+         <br/>
+
+        </span>
+        <span
+          ><strong><ion-icon name="calendar-outline"></ion-icon> Date : </strong
+          >{{class.date?  Date(class.date) : class.date}} <br
+        /></span>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

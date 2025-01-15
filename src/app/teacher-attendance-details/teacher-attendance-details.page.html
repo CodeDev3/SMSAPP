@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Details</ion-title>
+      <ion-buttons slot="start">
+      <ion-back-button default-href="/attendance"></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="page">
+    <ion-card class="profile-card" *ngIf="teacher">
+      <ion-grid>
+        <ion-row class="profile-header">
+       <ion-col>
+          <div class="profile-picture-container">
+              <img
+                [src]=" teacher.profileImage ? teacher.profileImage :'../../assets/blank-profile-picture-973460_1280.webp'"
+                alt="Profile Picture"
+                class="profile-picture"
+              />
+
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <div class="profile-info">
+              <p><strong>Name :</strong> {{teacher?.fullname}}</p>
+              <p><strong>Email :</strong> {{teacher?.email}}</p>
+              <p><strong>Date of Birth :</strong> {{teacher?.dob}}</p>
+              <p><strong>Mobile :</strong> {{teacher?.mob}}</p>
+              <p *ngIf="teacher?.subject"><strong>Subject :</strong> {{ teacher.subject }}</p>
+              <p ><strong>Start Time :</strong> {{ teacher.loginTime? teacher.loginTime:'Absent'}}</p>
+              <p *ngIf="teacher?.logoutTime"><strong>End Time :</strong> {{ teacher.logoutTime}}</p>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+</ion-content>

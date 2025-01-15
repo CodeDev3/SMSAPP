@@ -1,0 +1,76 @@
+<ion-header>
+  <ion-toolbar>
+        <ion-buttons slot="end">
+        <ion-menu-button  menu="mainMenu"></ion-menu-button>
+      </ion-buttons>
+    <ion-title><h2>Edit Profile</h2></ion-title>
+        <ion-buttons slot="start">
+  <ion-back-button default-href="/user-profile" ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="page">
+  <ion-card>
+  <form [formGroup]="editProfileForm" (ngSubmit)="onSubmit(editProfileForm.value)">
+           <ion-row class="profile-header">
+          <ion-col>
+              <div class="profile-picture-container">
+              
+              <input id="profileImage"  type="file" accept="image/*"  (change)="readFileURL($event)" > 
+              <ion-icon name="camera-outline"  color="dark" class="camera-button" size="large" (click)="openInput()"></ion-icon>
+
+              <img
+                [src]= "Image ?  Image  : '../../assets/blank-profile-picture-973460_1280.webp'"
+                alt="Profile Picture"
+                class="profile-picture"
+              />
+
+            </div>
+            </ion-col>
+          </ion-row>
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Username</ion-label>
+        <ion-input formControlName="username"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">First Name</ion-label>
+        <ion-input formControlName="firstName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Last Name</ion-label>
+        <ion-input formControlName="lastName"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Email</ion-label>
+        <ion-input formControlName="email" type="email"></ion-input>
+      </ion-item>
+       <ion-item id="date-trigger">
+          <ion-label>Date</ion-label>
+          <ion-text>{{ userDOB ? userDOB : 'Select Date' }}</ion-text>
+        </ion-item>
+        <ion-popover trigger="date-trigger">
+          <ng-template>
+            <ion-datetime
+              presentation="date"
+              [max]="currentDate"
+              (ionBlur)="onDatePickerBlur()"
+              (ionChange)="onDateChange($event)"
+              formControlName="dob"
+            >
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+      <ion-item>
+        <ion-label position="floating">Mobile Number</ion-label>
+        <ion-input formControlName="mobileNumber" type="tel"></ion-input>
+      </ion-item>
+    </ion-list>
+    <div class="ion-text-center">
+      <br>
+      <ion-button size="medium"  type="submit" [disabled]="editProfileForm.invalid" >Save</ion-button>
+    </div>
+  </form>
+  </ion-card>
+</ion-content>

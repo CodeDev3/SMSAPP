@@ -1,0 +1,115 @@
+<ion-content class="page" [fullscreen]="true">
+  <ion-header>
+    <ion-toolbar>
+      <ion-buttons slot="start">
+        <ion-back-button default-href="/"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="center" size="large">Sign Up</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-card class="my-card">
+    <div class="logo-container">
+      <img
+        src="../../assets/blue-app-logo-design.jpg"
+        alt="Logo"
+        class="logo"
+      />
+    </div>
+    <form [formGroup]="signupForm" (ngSubmit)="onSubmit(signupForm.value)">
+      <ion-list>
+        <ion-item>
+          <ion-label position="floating">Full Name</ion-label>
+          <ion-input type="text" formControlName="userFullName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Email</ion-label>
+          <ion-input type="email" formControlName="userEmail"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Username</ion-label>
+          <ion-input type="text" formControlName="userName"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="floating">Password</ion-label>
+          <ion-input type="password" formControlName="userPassword">
+            <ion-input-password-toggle slot="end"></ion-input-password-toggle>
+          </ion-input>
+        </ion-item>
+<br>
+        <ion-item id="date-trigger">
+          <ion-label>Date</ion-label>
+          <ion-text>{{ userDOB ? userDOB : 'Select Date' }}</ion-text>
+        </ion-item>
+
+        <ion-popover trigger="date-trigger">
+          <ng-template>
+            <ion-datetime
+              presentation="date"
+              [max]="currentDate"
+              (ionBlur)="onDatePickerBlur()"
+              (ionChange)="onDateChange($event)"
+              formControlName="userDOB"
+              [showDefaultButtons]="true"
+              [(ngModel)]="userDOB"
+            >
+            </ion-datetime>
+          </ng-template>
+        </ion-popover>
+
+        <ion-item>
+          <ion-label position="floating">Mobile Number</ion-label>
+          <ion-input type="tel" formControlName="userMob"></ion-input>
+        </ion-item>
+<br>
+        <ion-item>
+          <ion-select label="Class" placeholder="Select Class" formControlName="class">
+            <ion-select-option value="I">I</ion-select-option>
+            <ion-select-option value="II">II</ion-select-option>
+            <ion-select-option value="III">III</ion-select-option>
+            <ion-select-option value="IV">IV</ion-select-option>
+            <ion-select-option value="V">V</ion-select-option>
+            <ion-select-option value="VI">VI</ion-select-option>
+            <ion-select-option value="VII">VII</ion-select-option>
+            <ion-select-option value="VIII">VIII</ion-select-option>
+            <ion-select-option value="VIII">VIII</ion-select-option>
+            <ion-select-option value="IX">IX</ion-select-option>
+            <ion-select-option value="X">X</ion-select-option>
+            <ion-select-option value="XI">XI</ion-select-option>
+            <ion-select-option value="XII">XII</ion-select-option>
+          </ion-select>
+        </ion-item>
+<br>
+            <ion-item>
+        <ion-select label="Subject" placeholder="Select Subject" formControlName="subject">
+          <ion-select-option value="Hindi">Hindi</ion-select-option>
+          <ion-select-option value="English">English</ion-select-option>
+          <ion-select-option value="Math">Math</ion-select-option>
+          <ion-select-option value="Science">Science</ion-select-option>
+          <ion-select-option value="Social Science">Social Science</ion-select-option>
+          <ion-select-option value="EVS">EVS</ion-select-option>
+          <ion-select-option value="Computer">Computer</ion-select-option>
+        </ion-select>
+      </ion-item>
+
+
+
+      </ion-list>
+
+      <ion-label class="ion-text-center"
+        >{{ successResponse ? successResponse : errorResponse }}</ion-label
+      >
+
+      <ion-col class="ion-text-center">
+        <ion-button
+          type="submit"
+          shape="round"
+          class="singup-btn"
+          [disabled]="!signupForm.valid"
+        >
+          Sign Up</ion-button
+        >
+        <a href="/login"> Already registered? Login </a>
+      </ion-col>
+    </form>
+  </ion-card>
+</ion-content>
