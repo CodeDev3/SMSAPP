@@ -9,12 +9,21 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">Home</ion-title>
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+  <div class="Add-file">
+    <ion-button onclick="document.querySelector('#uploader').click()">
+      <ion-icon name="cloud-upload-outline"></ion-icon>
+      Upload File
+    </ion-button>
+    <input
+      type="file"
+      class="inputFile"
+      id="uploader"
+      (change)="readFile($event)"
+    />
   </div>
+  <div id="file-display"></div>
 </ion-content>
